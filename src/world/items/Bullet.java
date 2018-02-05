@@ -7,6 +7,7 @@ public class Bullet {
 	private int damage;
 	private float speed;
 	private float x;
+
 	private float y;
 	private float targetX;
 	private float targetY;
@@ -29,7 +30,7 @@ public class Bullet {
 	}
 
 	public Bullet(int dmg, float newX, float newY, float dir) {
-		this.speed = (float) 16;
+		this.speed = (float) 20;
 		this.damage = dmg;
 		this.x = newX;
 		this.y = newY;
@@ -41,28 +42,35 @@ public class Bullet {
 		}
 	}
 
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
 	public void update() {
 		float dY = 0;
 		float dX = 0;
-		System.out.println(direction);
 		if (this.direction < 90) {
 			// top right
-			dY = -(float) Math.cos(this.direction) * this.speed;
-			dX = (float) Math.sin(this.direction) * this.speed;
+			dY = -(float) Math.cos(Math.toRadians(this.direction)) * this.speed;
+			dX = (float) Math.sin(Math.toRadians(this.direction)) * this.speed;
 
 		} else if (this.direction < 180) {
 			// bottom right
-			dY = (float) Math.cos(this.direction) * this.speed;
-			dX = -(float) Math.sin(this.direction) * this.speed;
-		
+			dY = (float) Math.cos(Math.toRadians(this.direction)) * this.speed;
+			dX = -(float) Math.sin(Math.toRadians(this.direction)) * this.speed;
+
 		} else if (this.direction < 270) {
 			// bottom left
-			dY = (float) Math.cos(this.direction) * this.speed;
-			dX = (float) Math.sin(this.direction) * this.speed;
+			dY = (float) Math.cos(Math.toRadians(this.direction)) * this.speed;
+			dX = (float) Math.sin(Math.toRadians(this.direction)) * this.speed;
 		} else {
 			// top left
-			dY = -(float) Math.cos(this.direction) * this.speed;
-			dX = (float) Math.sin(this.direction) * this.speed;
+			dY = -(float) Math.cos(Math.toRadians(this.direction)) * this.speed;
+			dX = (float) Math.sin(Math.toRadians(this.direction)) * this.speed;
 		}
 
 		this.x += dX;
@@ -71,7 +79,8 @@ public class Bullet {
 	}
 
 	public void draw() {
-		this.icon.rotate(this.direction);
+		//this.icon.rotate((float) Math.toRadians(this.direction));
+		this.icon.setRotation(this.direction);
 		this.icon.draw(this.x, this.y, 4);
 	}
 

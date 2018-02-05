@@ -16,7 +16,7 @@ public class World {
 	private Player player;
 
 	private ArrayList<Bullet> bullets;
-	
+
 	private int xOffset = 0;
 	private int yOffset = 0;
 
@@ -48,28 +48,36 @@ public class World {
 			this.addToBullets(player.shoot());
 		}
 
-		float dir = (float) (Math.atan2(player.getY() - input.getMouseY(), player.getX() - input.getMouseX()));	
-		dir = (float) Math.toDegrees(dir - Math.PI/2);
+		float dir = (float) (Math.atan2(player.getY() - input.getMouseY(), player.getX() - input.getMouseX()));
+		dir = (float) Math.toDegrees(dir - Math.PI / 2);
 		player.setDirection(dir);
 
 		if (input.isKeyDown(Input.KEY_ESCAPE)) {
 			gc.exit();
 		}
 
-		for (Bullet bullet: this.bullets) {
+		for (Bullet bullet : this.bullets) {
 			bullet.update();
+
+		}
+		
+		for (int i = 0; i < bullets.size(); i++) {
+			Bullet bullet = bullets.get(i);
+			if ((bullet.getX() > xOffset || bullet.getX() < 0) || (bullet.getY() > yOffset || bullet.getY() < 0)) {
+		//		bullets.remove(i);
+			}
 		}
 	}
 
 	public void addToBullets(Bullet newbullet) {
 		this.bullets.add(newbullet);
 	}
-	
+
 	public void display() {
 
 		this.level.display(xOffset, yOffset);
 		this.player.draw();
-		for (Bullet bullet: this.bullets) {
+		for (Bullet bullet : this.bullets) {
 			bullet.draw();
 		}
 	}
