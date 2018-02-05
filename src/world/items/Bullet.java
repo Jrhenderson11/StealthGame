@@ -8,56 +8,71 @@ public class Bullet {
 	private float speed;
 	private float x;
 	private float y;
+	private float targetX;
+	private float targetY;
 	private float direction;
 
 	Image icon;
-	
+
+	public Bullet(int dmg, float newX, float newY, float targetX, float targetY) {
+		this.speed = (float) 16;
+		this.damage = dmg;
+		this.x = newX;
+		this.y = newY;
+		this.targetX = targetX;
+		this.targetY = targetY;
+		try {
+			this.icon = new Image("res/textures/bullet.png");
+		} catch (SlickException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public Bullet(int dmg, float newX, float newY, float dir) {
 		this.speed = (float) 16;
 		this.damage = dmg;
 		this.x = newX;
 		this.y = newY;
+		this.direction = dir;
 		try {
-			this.icon  = new Image("res/textures/bullet.png");
+			this.icon = new Image("res/textures/bullet.png");
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void update() {
 		float dY = 0;
 		float dX = 0;
+		System.out.println(direction);
+		if (this.direction < 90) {
+			// top right
+			dY = -(float) Math.cos(this.direction) * this.speed;
+			dX = (float) Math.sin(this.direction) * this.speed;
+
+		} else if (this.direction < 180) {
+			// bottom right
+			dY = (float) Math.cos(this.direction) * this.speed;
+			dX = -(float) Math.sin(this.direction) * this.speed;
 		
-		if (this.direction < Math.PI/2) {
-			//top right
+		} else if (this.direction < 270) {
+			// bottom left
 			dY = (float) Math.cos(this.direction) * this.speed;
 			dX = (float) Math.sin(this.direction) * this.speed;
-			
-		} else if (this.direction < Math.PI) {
-			//bottom right
-			dY = -(float) Math.cos(this.direction - Math.PI/2) * this.speed;
-			dX = (float) Math.sin(this.direction- Math.PI/2) * this.speed;
-		
-		} else if (this.direction < (Math.PI * 1.5)) {
-			//bottom left
-			dY = -(float) Math.cos(this.direction - Math.PI) * this.speed;
-			dX = -(float) Math.sin(this.direction - Math.PI) * this.speed;
-		} else if (this.direction < (2*Math.PI)) {
-			//top left
-			dY = (float) Math.cos(this.direction - (Math.PI * 1.5)) * this.speed;
-			dX = -(float) Math.sin(this.direction - (Math.PI * 1.5)) * this.speed;
+		} else {
+			// top left
+			dY = -(float) Math.cos(this.direction) * this.speed;
+			dX = (float) Math.sin(this.direction) * this.speed;
 		}
-		System.out.println(dX);
-		System.out.println(dY);
-		this.x+=dX;
-		this.y+=dY;
+
+		this.x += dX;
+		this.y += dY;
 
 	}
-	
+
 	public void draw() {
-		System.out.println("draw");
-		//this.icon.rotate(this.direction);
-		this.icon.draw(this.x,this.y);
+		this.icon.rotate(this.direction);
+		this.icon.draw(this.x, this.y, 4);
 	}
-	
+
 }

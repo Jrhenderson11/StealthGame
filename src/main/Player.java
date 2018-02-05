@@ -134,6 +134,7 @@ public class Player {
 		//shoot in dir
 		//animation
 		//sound
+		System.out.println(this.direction);
 		return this.currentWeapon.shoot((float) this.x,(float) this.y, this.direction);
 		
 	}

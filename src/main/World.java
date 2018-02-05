@@ -58,13 +58,10 @@ public class World {
 
 		for (Bullet bullet: this.bullets) {
 			bullet.update();
-			//bullet.draw();
 		}
-
 	}
 
 	public void addToBullets(Bullet newbullet) {
-		System.out.println("new bullet");
 		this.bullets.add(newbullet);
 	}
 	
