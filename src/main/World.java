@@ -58,7 +58,7 @@ public class World {
 
 		for (Bullet bullet: this.bullets) {
 			bullet.update();
-			bullet.draw();
+			//bullet.draw();
 		}
 
 	}
@@ -72,5 +72,8 @@ public class World {
 
 		this.level.display(xOffset, yOffset);
 		this.player.draw();
+		for (Bullet bullet: this.bullets) {
+			bullet.draw();
+		}
 	}
 }

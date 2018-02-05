@@ -13,7 +13,7 @@ public class Bullet {
 	Image icon;
 	
 	public Bullet(int dmg, float newX, float newY, float dir) {
-		this.speed = (float) 0.5;
+		this.speed = (float) 16;
 		this.damage = dmg;
 		this.x = newX;
 		this.y = newY;
@@ -47,13 +47,16 @@ public class Bullet {
 			dY = (float) Math.cos(this.direction - (Math.PI * 1.5)) * this.speed;
 			dX = -(float) Math.sin(this.direction - (Math.PI * 1.5)) * this.speed;
 		}
+		System.out.println(dX);
+		System.out.println(dY);
 		this.x+=dX;
 		this.y+=dY;
 
 	}
 	
 	public void draw() {
-		this.icon.rotate(this.direction);
+		System.out.println("draw");
+		//this.icon.rotate(this.direction);
 		this.icon.draw(this.x,this.y);
 	}
 	
