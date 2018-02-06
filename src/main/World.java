@@ -14,7 +14,8 @@ public class World {
 
 	private Level level;
 	private Player player;
-
+	private float pWidth;
+	
 	private ArrayList<Bullet> bullets;
 
 	private int xOffset = 0;
@@ -25,24 +26,27 @@ public class World {
 	public World(String mapName, Input newInput, Main newMaster) {
 		this.level = new Level(mapName);
 		this.player = new Player(3);
+		this.pWidth = player.getWidth();
 		this.input = newInput;
 		this.bullets = new ArrayList<Bullet>();
 	}
 
 	public void update(GameContainer gc) {
-
+		double deltaX = 0;
+		double deltaY = 0;
 		// Move player
 		if (input.isKeyDown(Input.KEY_W)) {
-			player.changeY(-player.speed);
+			//player.changeY(-player.speed);
+			deltaY = -player.speed;
 		}
 		if (input.isKeyDown(Input.KEY_S)) {
-			player.changeY(player.speed);
+			deltaY = player.speed;
 		}
 		if (input.isKeyDown(Input.KEY_A)) {
-			player.changeX(-player.speed);
+			deltaX = -player.speed;
 		}
 		if (input.isKeyDown(Input.KEY_D)) {
-			player.changeX(player.speed);
+			deltaX = player.speed;
 		}
 		if (input.isKeyDown(Input.KEY_SPACE)) {
 			this.addToBullets(player.shoot());
@@ -52,6 +56,18 @@ public class World {
 		dir = (float) Math.toDegrees(dir - Math.PI / 2);
 		player.setDirection(dir);
 
+		int collideX = (int) (player.getX() + deltaX) / Globals.TILE_WIDTH;
+		int collideY = (int) (player.getY() + deltaY) / Globals.TILE_HEIGHT;
+		
+		//COLLISIONS
+		if (this.level.getTile(collideX, collideY).getCollide()) {
+			//dont move?
+			//negate delta
+		} else {
+			player.changeX(deltaX);
+			player.changeY(deltaY);
+		} 
+		
 		if (input.isKeyDown(Input.KEY_ESCAPE)) {
 			gc.exit();
 		}

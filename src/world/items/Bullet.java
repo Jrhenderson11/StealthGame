@@ -7,8 +7,8 @@ public class Bullet {
 	private int damage;
 	private float speed;
 	private float x;
-
 	private float y;
+
 	private float targetX;
 	private float targetY;
 	private float direction;
@@ -30,7 +30,7 @@ public class Bullet {
 	}
 
 	public Bullet(int dmg, float newX, float newY, float dir) {
-		this.speed = (float) 20;
+		this.speed = (float) 40;
 		this.damage = dmg;
 		this.x = newX;
 		this.y = newY;

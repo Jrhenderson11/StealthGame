@@ -38,7 +38,7 @@ public class Player {
 			e.printStackTrace();
 		}
 		
-		this.speed = 0.5;
+		this.speed = 1;
 		
 		setInventory(inventorySize);
 		
@@ -125,7 +125,11 @@ public class Player {
 	public boolean isTrapped() {
 		return isTrapped;
 	}
-
+	
+	public float getWidth() {
+		return this.sprite.getWidth();
+	}
+	
 	/* ================*/
 	//     ACTIONS
 	/* ================*/

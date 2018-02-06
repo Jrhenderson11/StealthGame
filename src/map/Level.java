@@ -26,7 +26,6 @@ public class Level {
 	}
 
 	public void readMap(String filepath) {
-
 		BufferedReader br = null;
 
 		try {
@@ -65,6 +64,10 @@ public class Level {
 
 	}
 
+	public Tile getTile(int x, int y) {
+		return this.tileMap[x][y];
+	}
+	
 	private void setSprites() {
 		
 	}
